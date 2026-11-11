@@ -25,6 +25,7 @@ boot.loader.efi.canTouchEfiVariables = false;
   ];
 
   boot.initrd.services.lvm.enable = true;
+  networking.hostName = "nyx"; 
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = false;
 
@@ -41,4 +42,12 @@ boot.loader.efi.canTouchEfiVariables = false;
     "1.1.1.1"
     "8.8.8.8"
   ];
+
+  users.users.alice = {
+    isNormalUser = true;
+    description = "Alice";
+    extraGroups = ["wheel" "networkmanager"];
+    initalPassword = "abc123";
+    shell = pkgs.bash;
+  };
 }

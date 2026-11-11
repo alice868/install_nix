@@ -6,7 +6,7 @@
   };
 
   outputs = { nixpkgs, disko, ... }: {
-    nixosConfigurations.foo-server = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         disko.nixosModules.disko
