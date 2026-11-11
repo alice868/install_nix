@@ -1,4 +1,11 @@
-{ modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
   system.stateVersion = "26.05";
 
   boot.loader.grub = {
@@ -8,7 +15,7 @@
     efiInstallAsRemovable = true;
   };
 
-boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.efi.canTouchEfiVariables = false;
 
   disko.devices.disk.disk1.device = "/dev/sda";
   services.openssh.enable = true;
@@ -16,18 +23,30 @@ boot.loader.efi.canTouchEfiVariables = false;
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZk6C/0mp4hzjy2LNdul1ubAP5D/lc5qo3bb+JKp1R9 alice@neonix"
   ];
 
-
   boot.initrd.availableKernelModules = [
-  "hv_vmbus"
-  "hv_storvsc"
-  "sd_mod"
-  "dm_mod"
+    "hv_vmbus"
+    "hv_storvsc"
+    "sd_mod"
+    "dm_mod"
   ];
 
   boot.initrd.services.lvm.enable = true;
-  networking.hostName = "nyx"; 
+  networking.hostName = "nyx";
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = false;
+
+  environment.systemPackages = with pkgs; [
+    neovim
+    nixfmt
+    git
+  ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
+  };
 
   networking.interfaces.eth0.ipv4.addresses = [
     {
@@ -46,8 +65,11 @@ boot.loader.efi.canTouchEfiVariables = false;
   users.users.alice = {
     isNormalUser = true;
     description = "Alice";
-    extraGroups = ["wheel" "networkmanager"];
-    initalPassword = "abc123";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+    initialPassword = "abc123";
     shell = pkgs.bash;
   };
 }
