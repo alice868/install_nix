@@ -16,4 +16,21 @@
 
   boot.initrd.systemd.enable = true;
   boot.initrd.services.lvm.enable = true;
+
+  networking.useDHCP = false;
+  networking.interfaces.eth0.useDHCP = false;
+
+  networking.interfaces.eht0.ipv4.address = [
+    {
+      address = "172.16.0.169";
+      prefixLength = 24;
+    }
+  ];
+
+  networking.defaultGateway = "172.16.0.1";
+
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 }
