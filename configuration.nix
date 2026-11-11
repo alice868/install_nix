@@ -35,6 +35,11 @@
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = false;
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   environment.systemPackages = with pkgs; [
     neovim
     nixfmt
@@ -65,6 +70,27 @@
   users.users.alice = {
     isNormalUser = true;
     description = "Alice";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+    initialPassword = "abc123";
+    shell = pkgs.bash;
+  };
+  users.users.bob = {
+    isNormalUser = true;
+    description = "Bob";
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
+    initialPassword = "abc123";
+    shell = pkgs.bash;
+  };
+
+  users.users.cat = {
+    isNormalUser = true;
+    description = "Cat";
     extraGroups = [
       "wheel"
       "networkmanager"
