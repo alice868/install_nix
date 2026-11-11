@@ -1,7 +1,7 @@
 { modulesPath, ... }: {
   system.stateVersion = "26.05";
   imports = [
-    (modulesPath + "/profile/qemu-guest.nix")
+    (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   boot.loader.grub = {
