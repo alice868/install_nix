@@ -13,4 +13,7 @@
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZk6C/0mp4hzjy2LNdul1ubAP5D/lc5qo3bb+JKp1R9 alice@neonix"
   ];
+
+  boot.initrd.systemd.enable = true;
+  boot.initrd.services.lvm.enable = true;
 }
