@@ -1,3 +1,4 @@
+nix eval --raw   .#nixosConfigurations.nyx.config.system.build.toplevel.drvPath
 
 nix eval .#nixosConfigurations.nyx.config.system.build.toplevel
 
