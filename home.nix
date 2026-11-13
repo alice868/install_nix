@@ -10,44 +10,19 @@
     vimAlias = true;
   };
   home.packages = with pkgs; [
-
-    # Rust compiler and toolchain
     rustc
     cargo
     rustfmt
     clippy
     rust-analyzer
-
-    # Nix development
-    nixfmt
-    nil
-    nixd
-
-    # Rust development utilities
-    cargo-watch
-    cargo-edit
-    cargo-nextest
-    cargo-audit
-    cargo-expand
-    # Build dependencies
-    gcc
-    clang
-    llvm
-    pkg-config
-    openssl
-    gnumake
-    cmake
-
-    # CLI tools
     git
     ripgrep
     fd
     fzf
-    gcc
+    nixfmt
+    cmake
     gnumake
-    unzip
-    nodejs
-    python3
+    pkg-config
   ];
 
   home.sessionVariables = {
