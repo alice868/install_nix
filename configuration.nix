@@ -43,6 +43,8 @@
   environment.systemPackages = with pkgs; [
     neovim
     nixfmt
+    nil
+    nixd
     git
   ];
 
