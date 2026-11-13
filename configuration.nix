@@ -31,10 +31,10 @@
   ];
 
   boot.initrd.services.lvm.enable = true;
+  nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "nyx";
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = false;
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

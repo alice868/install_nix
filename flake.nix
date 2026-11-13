@@ -73,37 +73,37 @@
               clang --version | head -n 1
             '';
           };
+
+      devShells.${system}.rust-llvm =
+        pkgs.mkShell.override
+          {
+            stdenv = pkgs.llvmPackages.stdenv;
+          }
+          {
+            packages = with pkgs; [
+              rustc
+              cargo
+              rustfmt
+              clippy
+              rust-analyzer
+              llvmPackages.clang
+              llvmPackages.llvm
+              llvmPackages.lld
+              llvmPackages.libclang
+              pkg-config
+              cmake
+              gnumake
+            ];
+            LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+            shellHook = ''
+              echo "Rust + LLVM development environment"
+              rustc --version
+              clang --version | head -n 1
+            '';
+          };
       # Default shell
       devShells.${system}.default = self.devShells.${system}.gcc;
       formatter.${system} = pkgs.nixfmt;
     };
-
-  devShells.${system}.rust-llvm =
-    pkgs.mkShell.override
-      {
-        stdenv = pkgs.llvmPackages.stdenv;
-      }
-      {
-        packages = with pkgs; [
-          rustc
-          cargo
-          rustfmt
-          clippy
-          rust-analyzer
-          llvmPackages.clang
-          llvmPackages.llvm
-          llvmPackages.lld
-          llvmPackages.libclang
-          pkg-config
-          cmake
-          gnumake
-        ];
-        LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
-        shellHook = ''
-          echo "Rust + LLVM development environment"
-          rustc --version
-          clang --version | head -n 1
-        '';
-      };
 
 }
