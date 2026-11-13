@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.username = "alice";
   home.homeDirectory = "/home/alice";
@@ -31,6 +31,17 @@
   };
 
   xdg.enable = true;
+ home.activation.installLazyVim =
+    config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      if [ ! -f "$HOME/.config/nvim/lua/config/lazy.lua" ]; then
+        mkdir -p "$HOME/.config"
+        ${pkgs.git}/bin/git clone \
+          https://github.com/LazyVim/starter \
+          "$HOME/.config/nvim"
+        rm -rf "$HOME/.config/nvim/.git"
+      fi
+    '';
+  /*
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "LazyVim";
     repo = "starter";
@@ -38,4 +49,5 @@
     ##    hash = pkgs.lib.fakeHash;
     hash = "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=";
   };
+  */ 
 }
