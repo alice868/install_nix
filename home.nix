@@ -31,6 +31,7 @@
   };
 
   xdg.enable = true;
+  /*
  home.activation.installLazyVim =
     config.lib.dag.entryAfter [ "writeBoundary" ] ''
       if [ ! -f "$HOME/.config/nvim/lua/config/lazy.lua" ]; then
@@ -41,6 +42,8 @@
         rm -rf "$HOME/.config/nvim/.git"
       fi
     '';
+
+    */
   /*
   xdg.configFile."nvim".source = pkgs.fetchFromGitHub {
     owner = "LazyVim";
